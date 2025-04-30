@@ -1,0 +1,25 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'hello-azure'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'P1'
+    repository: '$(imageName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+
+- task: AzureWebAppContainer@1
+  inputs:
+    azureSubscription: 'SC2'
+    appName: 'app1project'
+    containers: |
+      appprojectacicd.azurecr.io/hello-azure:$(Build.BuildId)
