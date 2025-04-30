@@ -2,9 +2,9 @@ from flask import Flask
 from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from opencensus.trace.samplers import ProbabilitySampler
+import os
 
 app = Flask(__name__)
-
 
 middleware = FlaskMiddleware(
     app,
@@ -17,9 +17,7 @@ def hello():
     return 'Hello, world! This is my Azure DevOps-style deployment.'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
-
-
-
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
