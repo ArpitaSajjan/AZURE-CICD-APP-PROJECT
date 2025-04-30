@@ -1,1 +1,4 @@
 flask
+opencensus-ext-azure
+opencensus-ext-flask
+
