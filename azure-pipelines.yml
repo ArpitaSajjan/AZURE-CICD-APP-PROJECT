@@ -14,7 +14,8 @@ steps:
     containerRegistry: 'P1'
     repository: '$(imageName)'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: 'Dockerfile'
+
     tags: |
       $(Build.BuildId)
 
